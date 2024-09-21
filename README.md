@@ -1,6 +1,6 @@
 # Control Workspace
 
-This Terraform configuration provisions resources for demonstrating the (HCP) [Terraform](https://terraform.io) (Enterprise) - [PrismaCloud](https://www.paloaltonetworks.com/prisma/cloud) [Run Task](https://docs.prismacloud.io/en/enterprise-edition/content-collections/application-security/get-started/connect-code-and-build-providers/ci-cd-runs/add-terraform-run-tasks) integration.
+This Terraform configuration provisions resources for demonstrating the (HCP) [Terraform](https://terraform.io) (Enterprise) - [Prisma Cloud](https://www.paloaltonetworks.com/prisma/cloud) [Run Task](https://docs.prismacloud.io/en/enterprise-edition/content-collections/application-security/get-started/connect-code-and-build-providers/ci-cd-runs/add-terraform-run-tasks) integration.
 
 ## Usage
 
@@ -89,3 +89,14 @@ Please see [terraform.tfvars.example](terraform.tfvars.example) for sample input
 | <a name="output_repo_ssh_clone_url"></a> [repo\_ssh\_clone\_url](#output\_repo\_ssh\_clone\_url) | n/a |
 | <a name="output_tfe_team_token"></a> [tfe\_team\_token](#output\_tfe\_team\_token) | n/a |
 <!-- END_TF_DOCS -->
+
+---
+
+## Reference:
+
+* [Terraform: Integration guide for Prisma Cloud by Palo Alto Networks](https://developer.hashicorp.com/validated-designs/integration-patterns-guides-terraform-palo-alto-prisma-cloud-integration)
+* [HCP Terraform – Prisma Cloud Run Task Integration](https://registry.terraform.io/providers/PaloAltoNetworks/prismacloud/latest/docs)
+* [tfe Provider Docimentation](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs)
+* [GitHub Provider Documentation](https://registry.terraform.io/providers/integrations/github/latest/docs)
+* [Securing Golden Images at Build Using Prisma Cloud](https://www.paloaltonetworks.com/blog/prisma-cloud/securing-golden-images-hashicorp-packer/)
+---
