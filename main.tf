@@ -92,11 +92,11 @@ resource "tfe_team_access" "team_access_dev" {
 }
 
 resource "tfe_notification_configuration" "slack-dev" {
-  name = module.workspace-dev.workspace_name
-  enabled = true
+  name             = module.workspace-dev.workspace_name
+  enabled          = true
   destination_type = "slack"
-  url = var.slack_webhook_url
-  workspace_id = module.workspace-dev.workspace_id
+  url              = var.slack_webhook_url
+  workspace_id     = module.workspace-dev.workspace_id
 }
 
 #
@@ -128,11 +128,11 @@ resource "tfe_team_access" "team_access_stage" {
 }
 
 resource "tfe_notification_configuration" "slack-stage" {
-  name = module.workspace-stage.workspace_name
-  enabled = true
+  name             = module.workspace-stage.workspace_name
+  enabled          = true
   destination_type = "slack"
-  url = var.slack_webhook_url
-  workspace_id = module.workspace-stage.workspace_id
+  url              = var.slack_webhook_url
+  workspace_id     = module.workspace-stage.workspace_id
 }
 
 #
@@ -164,11 +164,11 @@ resource "tfe_team_access" "team_access_prod" {
 }
 
 resource "tfe_notification_configuration" "slack-prod" {
-  name = module.workspace-prod.workspace_name
-  enabled = true
+  name             = module.workspace-prod.workspace_name
+  enabled          = true
   destination_type = "slack"
-  url = var.slack_webhook_url
-  workspace_id = module.workspace-prod.workspace_id
+  url              = var.slack_webhook_url
+  workspace_id     = module.workspace-prod.workspace_id
 }
 
 #
