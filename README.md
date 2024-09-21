@@ -2,6 +2,8 @@
 
 This module provisions resources for demonstrating the (HCP) [Terraform](https://terraform.io) (Enterprise) - [PrismaCloud](https://www.paloaltonetworks.com/prisma/cloud) [Run Task](https://docs.prismacloud.io/en/enterprise-edition/content-collections/application-security/get-started/connect-code-and-build-providers/ci-cd-runs/add-terraform-run-tasks) integration.
 
+![Buildout overview](control.png?raw=true)
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
