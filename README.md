@@ -16,7 +16,11 @@ In order to run this Terraform configuration, you must have:
 ### Required Inputs
 Please see [terraform.tfvars.example](terraform.tfvars.example) for sample inputs.
 
-![Buildout overview](control.png?raw=true)
+### Terraform Graph Output
+![Terraform Graph](graph.png?raw=true)
+
+### Demo Environment
+![Demo Environment](control.png?raw=true)
 
 
 ---

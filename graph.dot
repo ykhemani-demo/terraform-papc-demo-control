@@ -1,0 +1,82 @@
+digraph G {
+  rankdir = "RL";
+  node [shape = rect, fontname = "sans-serif"];
+  "tfe_notification_configuration.slack-dev" [label="tfe_notification_configuration.slack-dev"];
+  "tfe_notification_configuration.slack-prod" [label="tfe_notification_configuration.slack-prod"];
+  "tfe_notification_configuration.slack-stage" [label="tfe_notification_configuration.slack-stage"];
+  "tfe_organization_run_task.hcp" [label="tfe_organization_run_task.hcp"];
+  "tfe_team.team" [label="tfe_team.team"];
+  "tfe_team_access.team_access_dev" [label="tfe_team_access.team_access_dev"];
+  "tfe_team_access.team_access_prod" [label="tfe_team_access.team_access_prod"];
+  "tfe_team_access.team_access_stage" [label="tfe_team_access.team_access_stage"];
+  "tfe_team_token.team_token" [label="tfe_team_token.team_token"];
+  subgraph "cluster_module.github-branch-dev" {
+    label = "module.github-branch-dev"
+    fontname = "sans-serif"
+    "module.github-branch-dev.github_branch.branch" [label="github_branch.branch"];
+  }
+  subgraph "cluster_module.github-branch-prod" {
+    label = "module.github-branch-prod"
+    fontname = "sans-serif"
+    "module.github-branch-prod.github_branch.branch" [label="github_branch.branch"];
+  }
+  subgraph "cluster_module.github-branch-stage" {
+    label = "module.github-branch-stage"
+    fontname = "sans-serif"
+    "module.github-branch-stage.github_branch.branch" [label="github_branch.branch"];
+  }
+  subgraph "cluster_module.github-repo" {
+    label = "module.github-repo"
+    fontname = "sans-serif"
+    "module.github-repo.github_repository.repo" [label="github_repository.repo"];
+  }
+  subgraph "cluster_module.oauth_client" {
+    label = "module.oauth_client"
+    fontname = "sans-serif"
+    "module.oauth_client.tfe_oauth_client.oauth_client" [label="tfe_oauth_client.oauth_client"];
+  }
+  subgraph "cluster_module.project" {
+    label = "module.project"
+    fontname = "sans-serif"
+    "module.project.data.tfe_organization.org" [label="data.tfe_organization.org"];
+    "module.project.tfe_project.project" [label="tfe_project.project"];
+  }
+  subgraph "cluster_module.workspace-dev" {
+    label = "module.workspace-dev"
+    fontname = "sans-serif"
+    "module.workspace-dev.tfe_workspace.workspace" [label="tfe_workspace.workspace"];
+  }
+  subgraph "cluster_module.workspace-prod" {
+    label = "module.workspace-prod"
+    fontname = "sans-serif"
+    "module.workspace-prod.tfe_workspace.workspace" [label="tfe_workspace.workspace"];
+  }
+  subgraph "cluster_module.workspace-stage" {
+    label = "module.workspace-stage"
+    fontname = "sans-serif"
+    "module.workspace-stage.tfe_workspace.workspace" [label="tfe_workspace.workspace"];
+  }
+  "tfe_notification_configuration.slack-dev" -> "module.workspace-dev.tfe_workspace.workspace";
+  "tfe_notification_configuration.slack-prod" -> "module.workspace-prod.tfe_workspace.workspace";
+  "tfe_notification_configuration.slack-stage" -> "module.workspace-stage.tfe_workspace.workspace";
+  "tfe_team_access.team_access_dev" -> "tfe_team.team";
+  "tfe_team_access.team_access_dev" -> "module.workspace-dev.tfe_workspace.workspace";
+  "tfe_team_access.team_access_prod" -> "tfe_team.team";
+  "tfe_team_access.team_access_prod" -> "module.workspace-prod.tfe_workspace.workspace";
+  "tfe_team_access.team_access_stage" -> "tfe_team.team";
+  "tfe_team_access.team_access_stage" -> "module.workspace-stage.tfe_workspace.workspace";
+  "tfe_team_token.team_token" -> "tfe_team.team";
+  "module.github-branch-dev.github_branch.branch" -> "module.github-repo.github_repository.repo";
+  "module.github-branch-prod.github_branch.branch" -> "module.github-repo.github_repository.repo";
+  "module.github-branch-stage.github_branch.branch" -> "module.github-repo.github_repository.repo";
+  "module.project.tfe_project.project" -> "module.project.data.tfe_organization.org";
+  "module.workspace-dev.tfe_workspace.workspace" -> "module.github-branch-dev.github_branch.branch";
+  "module.workspace-dev.tfe_workspace.workspace" -> "module.oauth_client.tfe_oauth_client.oauth_client";
+  "module.workspace-dev.tfe_workspace.workspace" -> "module.project.tfe_project.project";
+  "module.workspace-prod.tfe_workspace.workspace" -> "module.github-branch-prod.github_branch.branch";
+  "module.workspace-prod.tfe_workspace.workspace" -> "module.oauth_client.tfe_oauth_client.oauth_client";
+  "module.workspace-prod.tfe_workspace.workspace" -> "module.project.tfe_project.project";
+  "module.workspace-stage.tfe_workspace.workspace" -> "module.github-branch-stage.github_branch.branch";
+  "module.workspace-stage.tfe_workspace.workspace" -> "module.oauth_client.tfe_oauth_client.oauth_client";
+  "module.workspace-stage.tfe_workspace.workspace" -> "module.project.tfe_project.project";
+}
