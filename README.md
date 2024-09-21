@@ -61,6 +61,9 @@ Please see [terraform.tfvars.example](terraform.tfvars.example) for sample input
 
 | Name | Type |
 |------|------|
+| [tfe_notification_configuration.slack-dev](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/notification_configuration) | resource |
+| [tfe_notification_configuration.slack-prod](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/notification_configuration) | resource |
+| [tfe_notification_configuration.slack-stage](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/notification_configuration) | resource |
 | [tfe_organization_run_task.hcp](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/organization_run_task) | resource |
 | [tfe_team.team](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/team) | resource |
 | [tfe_team_access.team_access_dev](https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/team_access) | resource |
@@ -76,6 +79,7 @@ Please see [terraform.tfvars.example](terraform.tfvars.example) for sample input
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | Naming prefix. | `string` | n/a | yes |
 | <a name="input_run_task_hcp_hmac_key"></a> [run\_task\_hcp\_hmac\_key](#input\_run\_task\_hcp\_hmac\_key) | HMAC key for HCP Run Task. | `string` | n/a | yes |
 | <a name="input_run_task_hcp_url"></a> [run\_task\_hcp\_url](#input\_run\_task\_hcp\_url) | URL for HCP Run Task. | `string` | n/a | yes |
+| <a name="input_slack_webhook_url"></a> [slack\_webhook\_url](#input\_slack\_webhook\_url) | Slack app webhook URL for sending notifications. | `string` | n/a | yes |
 | <a name="input_tfe_organization"></a> [tfe\_organization](#input\_tfe\_organization) | Name of (HCP) Terraform (Enterprise) organization. | `string` | n/a | yes |
 | <a name="input_tfe_project"></a> [tfe\_project](#input\_tfe\_project) | Name of (HCP) Terraform (Enterprise) project. | `string` | n/a | yes |
 | <a name="input_tfe_team"></a> [tfe\_team](#input\_tfe\_team) | Name of the team. | `string` | n/a | yes |
@@ -86,11 +90,14 @@ Please see [terraform.tfvars.example](terraform.tfvars.example) for sample input
 
 | Name | Description |
 |------|-------------|
-| <a name="output_repo_html_url"></a> [repo\_html\_url](#output\_repo\_html\_url) | n/a |
-| <a name="output_repo_http_clone_url"></a> [repo\_http\_clone\_url](#output\_repo\_http\_clone\_url) | n/a |
-| <a name="output_repo_name"></a> [repo\_name](#output\_repo\_name) | n/a |
-| <a name="output_repo_ssh_clone_url"></a> [repo\_ssh\_clone\_url](#output\_repo\_ssh\_clone\_url) | n/a |
-| <a name="output_tfe_team_token"></a> [tfe\_team\_token](#output\_tfe\_team\_token) | n/a |
+| <a name="output_repo_html_url"></a> [repo\_html\_url](#output\_repo\_html\_url) | URL for the GitHub repository for our demo environment. |
+| <a name="output_repo_http_clone_url"></a> [repo\_http\_clone\_url](#output\_repo\_http\_clone\_url) | URL that can be provided to git clone to clone the repository via HTTPS. |
+| <a name="output_repo_name"></a> [repo\_name](#output\_repo\_name) | Full name of the GitHub repository. |
+| <a name="output_repo_ssh_clone_url"></a> [repo\_ssh\_clone\_url](#output\_repo\_ssh\_clone\_url) | URL that can be provided to git clone to clone the repository via SSH. |
+| <a name="output_tfe_team_token"></a> [tfe\_team\_token](#output\_tfe\_team\_token) | Terraform Team Token. Use this when configuring the Run Task in Prisma Cloud. |
+| <a name="output_workspace-dev-url"></a> [workspace-dev-url](#output\_workspace-dev-url) | Development Workspace URL. |
+| <a name="output_workspace-prod-url"></a> [workspace-prod-url](#output\_workspace-prod-url) | Production Workspace URL. |
+| <a name="output_workspace-stage-url"></a> [workspace-stage-url](#output\_workspace-stage-url) | Staging Workspace URL. |
 <!-- END_TF_DOCS -->
 
 ---

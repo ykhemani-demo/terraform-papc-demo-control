@@ -43,5 +43,6 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_workspace_id"></a> [workspace\_id](#output\_workspace\_id) | n/a |
+| <a name="output_workspace_name"></a> [workspace\_name](#output\_workspace\_name) | n/a |
 | <a name="output_workspace_url"></a> [workspace\_url](#output\_workspace\_url) | n/a |
 <!-- END_TF_DOCS -->
