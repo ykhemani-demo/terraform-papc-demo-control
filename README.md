@@ -2,6 +2,10 @@
 
 This Terraform configuration provisions resources for demonstrating the (HCP) [Terraform](https://terraform.io) (Enterprise) - [Prisma Cloud](https://www.paloaltonetworks.com/prisma/cloud) [Run Task](https://docs.prismacloud.io/en/enterprise-edition/content-collections/application-security/get-started/connect-code-and-build-providers/ci-cd-runs/add-terraform-run-tasks) integration.
 
+The Prisma Cloud Run Task integration with HCP Terraform embeds Prisma Cloud's extensive library of pre-configured security policies into every workspace run. Prisma Cloud scans and enforces during the terraform plan stage, reporting results back to both HCP Terraform and Prisma Cloud.
+
+Run tasks are driven by event hooks, which allow Prisma Cloud to receive information about each workspace run, and act upon this information by enforcing policies at build-time. Prisma Cloud can be configured to perform a scan at either the pre-plan or post-plan stage for a given workspace.
+
 ## Usage
 
 You can run this Terraform configuration from (HCP) Terraform (Enterprise) or using the Terraform CLI.
@@ -13,15 +17,14 @@ In order to run this Terraform configuration, you must have:
 * A GitHub.com account.
 * Admin access to Prisma Cloud.
 
-### Required Inputs
-Please see [terraform.tfvars.example](terraform.tfvars.example) for sample inputs.
-
-### Terraform Graph Output
+### Terraform Graph
 ![Terraform Graph](graph.png?raw=true)
 
 ### Demo Environment
 ![Demo Environment](control.png?raw=true)
 
+### Required Inputs
+Please see [terraform.tfvars.example](terraform.tfvars.example) for sample inputs.
 
 ---
 
