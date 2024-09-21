@@ -6,25 +6,35 @@ The Prisma Cloud Run Task integration with HCP Terraform embeds Prisma Cloud's e
 
 Run tasks are driven by event hooks, which allow Prisma Cloud to receive information about each workspace run, and act upon this information by enforcing policies at build-time. Prisma Cloud can be configured to perform a scan at either the pre-plan or post-plan stage for a given workspace.
 
+We also configure the HCP Packer Run Task Integration. 
+
 ## Usage
 
-You can run this Terraform configuration from (HCP) Terraform (Enterprise) or using the Terraform CLI.
+You can run this Terraform configuration in (HCP) Terraform (Enterprise) or using the Terraform CLI.
 
 ### Prerequisites
 In order to run this Terraform configuration, you must have:
-* An HCP Terraform organization or Terraform Enterprise with support for Teams and Run Tasks.
+* An HCP Terraform organization or Terraform Enterprise with support for Teams and Run Tasks. Use a separate organization for this demo environment to avoid conflicts.
 * Admin access to the Terraform organization.
 * A GitHub.com account.
 * Admin access to Prisma Cloud.
 
-### Terraform Graph
-![Terraform Graph](graph.png?raw=true)
-
 ### Demo Environment
 ![Demo Environment](control.png?raw=true)
 
+### Terraform Graph
+![Terraform Graph](graph.png?raw=true)
+
 ### Required Inputs
 Please see [terraform.tfvars.example](terraform.tfvars.example) for sample inputs.
+
+### Testing
+This Terraform configuration has been tested with:
+* Terraform 1.9.5
+* tfe Provider 0.58.1
+* GitHub Provider 6.3.0
+* HCP Terraform organization with Plus entitlement
+* Prisma Cloud Enterprise
 
 ---
 
