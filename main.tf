@@ -91,6 +91,14 @@ resource "tfe_team_access" "team_access_dev" {
   workspace_id = module.workspace-dev.workspace_id
 }
 
+resource "tfe_notification_configuration" "slack-dev" {
+  name = module.workspace-dev.workspace_name
+  enabled = true
+  destination_type = "slack"
+  url = var.slack_webhook_url
+  workspace_id = module.workspace-dev.workspace_id
+}
+
 #
 ########################################################################
 # stage
@@ -119,6 +127,14 @@ resource "tfe_team_access" "team_access_stage" {
   workspace_id = module.workspace-stage.workspace_id
 }
 
+resource "tfe_notification_configuration" "slack-stage" {
+  name = module.workspace-stage.workspace_name
+  enabled = true
+  destination_type = "slack"
+  url = var.slack_webhook_url
+  workspace_id = module.workspace-stage.workspace_id
+}
+
 #
 ########################################################################
 # prod
@@ -144,6 +160,14 @@ module "workspace-prod" {
 resource "tfe_team_access" "team_access_prod" {
   access       = "admin"
   team_id      = tfe_team.team.id
+  workspace_id = module.workspace-prod.workspace_id
+}
+
+resource "tfe_notification_configuration" "slack-prod" {
+  name = module.workspace-prod.workspace_name
+  enabled = true
+  destination_type = "slack"
+  url = var.slack_webhook_url
   workspace_id = module.workspace-prod.workspace_id
 }
 

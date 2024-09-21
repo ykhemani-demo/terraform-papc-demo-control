@@ -44,3 +44,8 @@ variable "run_task_hcp_hmac_key" {
   description = "HMAC key for HCP Run Task."
   sensitive   = true
 }
+
+variable "slack_webhook_url" {
+  type = string
+  description = "Slack app webhook URL for sending notifications."
+}
