@@ -43,3 +43,5 @@ hold
 
 **/.env
 
+modules/**/.terraform.lock.hcl
+
