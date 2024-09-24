@@ -83,22 +83,10 @@ module "workspace-dev" {
   vcs_repo_identifier = "${var.vcs_owner}/${module.github-repo.name}"
   vcs_repo_branch     = module.github-branch-dev.branch
   oauth_token_id      = module.oauth_client.oauth_token_id
+  hcp_run_task_id     = tfe_organization_run_task.hcp.id
+  tfe_team_id         = tfe_team.team.id
+  slack_webhook_url   = var.slack_webhook_url
 }
-
-resource "tfe_team_access" "team_access_dev" {
-  access       = "admin"
-  team_id      = tfe_team.team.id
-  workspace_id = module.workspace-dev.workspace_id
-}
-
-resource "tfe_notification_configuration" "slack-dev" {
-  name             = module.workspace-dev.workspace_name
-  enabled          = true
-  destination_type = "slack"
-  url              = var.slack_webhook_url
-  workspace_id     = module.workspace-dev.workspace_id
-}
-
 #
 ########################################################################
 # stage
@@ -119,22 +107,10 @@ module "workspace-stage" {
   vcs_repo_identifier = "${var.vcs_owner}/${module.github-repo.name}"
   vcs_repo_branch     = module.github-branch-stage.branch
   oauth_token_id      = module.oauth_client.oauth_token_id
+  hcp_run_task_id     = tfe_organization_run_task.hcp.id
+  tfe_team_id         = tfe_team.team.id
+  slack_webhook_url   = var.slack_webhook_url
 }
-
-resource "tfe_team_access" "team_access_stage" {
-  access       = "admin"
-  team_id      = tfe_team.team.id
-  workspace_id = module.workspace-stage.workspace_id
-}
-
-resource "tfe_notification_configuration" "slack-stage" {
-  name             = module.workspace-stage.workspace_name
-  enabled          = true
-  destination_type = "slack"
-  url              = var.slack_webhook_url
-  workspace_id     = module.workspace-stage.workspace_id
-}
-
 #
 ########################################################################
 # prod
@@ -155,21 +131,9 @@ module "workspace-prod" {
   vcs_repo_identifier = "${var.vcs_owner}/${module.github-repo.name}"
   vcs_repo_branch     = module.github-branch-prod.branch
   oauth_token_id      = module.oauth_client.oauth_token_id
+  hcp_run_task_id     = tfe_organization_run_task.hcp.id
+  tfe_team_id         = tfe_team.team.id
+  slack_webhook_url   = var.slack_webhook_url
 }
-
-resource "tfe_team_access" "team_access_prod" {
-  access       = "admin"
-  team_id      = tfe_team.team.id
-  workspace_id = module.workspace-prod.workspace_id
-}
-
-resource "tfe_notification_configuration" "slack-prod" {
-  name             = module.workspace-prod.workspace_name
-  enabled          = true
-  destination_type = "slack"
-  url              = var.slack_webhook_url
-  workspace_id     = module.workspace-prod.workspace_id
-}
-
 #
 ########################################################################

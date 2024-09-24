@@ -58,3 +58,24 @@ variable "oauth_token_id" {
   type        = string
   description = "OAuth token id for VCS provider."
 }
+
+variable "hcp_run_task_id" {
+  type = string
+  description = "HCP Run Task ID."
+}
+
+variable "tfe_team_id" {
+  type = string
+  description = "ID of team to be given access to this workspace."
+}
+
+variable "tfe_team_access" {
+  type = string
+  description = "Access to be granted to TFE Team identified by var.tfe_team_id."
+  default = "admin"
+}
+
+variable "slack_webhook_url" {
+  type = string
+  description = "Slack notification URL."
+}
