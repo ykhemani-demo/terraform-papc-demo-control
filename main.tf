@@ -1,139 +1,58 @@
 terraform {
+
   required_providers {
-    tfe = {
-      source  = "hashicorp/tfe"
-      version = "~> 0.58"
-    }
-
-    github = {
-      source  = "integrations/github"
-      version = "~> 6.3"
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
     }
   }
-
-  #  cloud {}
-
-  required_version = "~> 1.9.0"
 }
 
-provider "github" {
-  owner = var.vcs_owner
-
+provider "aws" {
+  region     = var.region
+  access_key = var.access_key
+  secret_key = var.secret_key
 }
 
-########################################################################
+resource "aws_instance" "web_host" {
+  ami           = "${var.ami}"
+  instance_type = "t2.nano"
 
-module "github-repo" {
-  source = "./modules/terraform-github-repo"
-
-  vcs_repo_name = var.vcs_repo_name
-}
-
-module "project" {
-  source = "./modules/terraform-tfe-tfe_project"
-
-  organization = var.tfe_organization
-  project      = var.tfe_project
-}
-
-module "oauth_client" {
-  source = "./modules/terraform-tfe-tfe_oauth_client"
-
-  organization                 = var.tfe_organization
-  github_personal_access_token = var.github_personal_access_token
-}
-
-resource "tfe_organization_run_task" "hcp" {
-  organization = var.tfe_organization
-  url          = var.run_task_hcp_url
-  name         = "hcp"
-  enabled      = true
-  hmac_key     = var.run_task_hcp_hmac_key
-}
-
-resource "tfe_team" "team" {
-  name                          = var.tfe_team
-  organization                  = var.tfe_organization
-  allow_member_token_management = false
-  organization_access {
-    manage_run_tasks = true
+  user_data = <<EOF
+#! /bin/bash
+sudo apt-get update
+sudo apt-get install -y apache2
+sudo systemctl start apache2
+sudo systemctl enable apache2
+export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMAAA
+export AWS_SECRET_ACCESS_KEY=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
+export AWS_DEFAULT_REGION=us-west-2
+echo "<h1>Deployed via Terraform</h1>" | sudo tee /var/www/html/index.html
+EOF
+  tags = {
+    yor_name  = "web_host"
+    yor_trace = "ab71c4a0-52fa-4b24-bbe8-9ea53948dc57"
   }
 }
 
-resource "tfe_team_token" "team_token" {
-  team_id = tfe_team.team.id
+
+
+resource "aws_ebs_volume" "ebs-web-storage" {
+  availability_zone = "${var.region}a"
+  size              = 40
+  tags = {
+    yor_name  = "ebs-web-storage"
+    yor_trace = "7ebc23f5-b638-47b6-95d1-7612ba7787a9"
+  }
 }
 
-########################################################################
-# dev
-#
-module "github-branch-dev" {
-  source = "./modules/terraform-github-branch"
 
-  vcs_repo_name   = module.github-repo.name
-  vcs_repo_branch = "dev"
+resource "aws_s3_bucket" "test_bucket" {
+  bucket        = "my-test-bucket"
+  force_destroy = true
+  acl           = "public-read"
+  tags = {
+    yor_name  = "test_bucket"
+    yor_trace = "d2d37441-82e9-489e-b100-b56b81e10cf1"
+  }
 }
-
-module "workspace-dev" {
-  source = "./modules/terraform-tfe-tfe_workspace"
-
-  organization        = var.tfe_organization
-  project_id          = module.project.project_id
-  workspace           = "${var.prefix}-pc-demo-dev"
-  vcs_repo_identifier = "${var.vcs_owner}/${module.github-repo.name}"
-  vcs_repo_branch     = module.github-branch-dev.branch
-  oauth_token_id      = module.oauth_client.oauth_token_id
-  hcp_run_task_id     = tfe_organization_run_task.hcp.id
-  tfe_team_id         = tfe_team.team.id
-  slack_webhook_url   = var.slack_webhook_url
-}
-#
-########################################################################
-# stage
-#
-module "github-branch-stage" {
-  source = "./modules/terraform-github-branch"
-
-  vcs_repo_name   = module.github-repo.name
-  vcs_repo_branch = "stage"
-}
-
-module "workspace-stage" {
-  source = "./modules/terraform-tfe-tfe_workspace"
-
-  organization        = var.tfe_organization
-  project_id          = module.project.project_id
-  workspace           = "${var.prefix}-pc-demo-stage"
-  vcs_repo_identifier = "${var.vcs_owner}/${module.github-repo.name}"
-  vcs_repo_branch     = module.github-branch-stage.branch
-  oauth_token_id      = module.oauth_client.oauth_token_id
-  hcp_run_task_id     = tfe_organization_run_task.hcp.id
-  tfe_team_id         = tfe_team.team.id
-  slack_webhook_url   = var.slack_webhook_url
-}
-#
-########################################################################
-# prod
-#
-module "github-branch-prod" {
-  source = "./modules/terraform-github-branch"
-
-  vcs_repo_name   = module.github-repo.name
-  vcs_repo_branch = "prod"
-}
-
-module "workspace-prod" {
-  source = "./modules/terraform-tfe-tfe_workspace"
-
-  organization        = var.tfe_organization
-  project_id          = module.project.project_id
-  workspace           = "${var.prefix}-pc-demo-prod"
-  vcs_repo_identifier = "${var.vcs_owner}/${module.github-repo.name}"
-  vcs_repo_branch     = module.github-branch-prod.branch
-  oauth_token_id      = module.oauth_client.oauth_token_id
-  hcp_run_task_id     = tfe_organization_run_task.hcp.id
-  tfe_team_id         = tfe_team.team.id
-  slack_webhook_url   = var.slack_webhook_url
-}
-#
-########################################################################
