@@ -49,3 +49,24 @@ variable "slack_webhook_url" {
   type        = string
   description = "Slack app webhook URL for sending notifications."
 }
+
+variable "hcp_client_id" {
+  type        = string
+  description = "HCP Client ID for Service Principal with Viewer Role assigned in the HCP Project with your Packer Registry (Contributor Role if you want to allow use of latest channel)."
+}
+
+variable "hcp_client_secret" {
+  type        = string
+  description = "HCP Client Secert for Service Principal with Viewer Role assigned in the HCP Project with your Packer Registry (Contributor Role if you want to allow use of latest channel)."
+  sensitive   = true
+}
+
+variable "hcp_packer_image_bucket_name" {
+  type        = string
+  description = "The slug of the HCP Packer Registry image bucket to pull from."
+}
+
+variable "hcp_packer_image_channel" {
+  type        = string
+  description = "The channel that points to the version of the image you want."
+}
