@@ -8,3 +8,5 @@ github_personal_access_token = "my_github_personal_access_token_for_my_tfc_org_o
 run_task_hcp_url             = "https://api.cloud.hashicorp.com/packer/obtain_this_from_your_hcp_account"
 run_task_hcp_hmac_key        = "obtain_this_from_your_hcp_account"
 slack_webhook_url            = "https://hooks.slack.com/services/generate_from_slack"
+hcp_packer_image_bucket_name = "ubuntu-jammy-java"
+hcp_packer_image_channel     = "prod"
