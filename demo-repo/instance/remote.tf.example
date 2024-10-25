@@ -1,0 +1,10 @@
+terraform {
+  cloud {
+
+    organization = "my-demo-org"
+
+    workspaces {
+      name = "prefix-demo-dev"
+    }
+  }
+}
