@@ -26,8 +26,9 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_repo_description"></a> [repo\_description](#input\_repo\_description) | A description of the repository. | `string` | n/a | yes |
+| <a name="input_repo_name"></a> [repo\_name](#input\_repo\_name) | The name of the repository. | `string` | n/a | yes |
 | <a name="input_repo_visibility"></a> [repo\_visibility](#input\_repo\_visibility) | Can be public or private. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, visibility can also be internal. The visibility parameter overrides the private parameter. | `string` | `"private"` | no |
-| <a name="input_vcs_repo_name"></a> [vcs\_repo\_name](#input\_vcs\_repo\_name) | The name of the repository. | `string` | n/a | yes |
 
 ## Outputs
 
