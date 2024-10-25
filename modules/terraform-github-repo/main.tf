@@ -10,9 +10,11 @@ terraform {
 }
 
 resource "github_repository" "repo" {
-  name       = var.vcs_repo_name
-  visibility = var.repo_visibility
-  auto_init  = true
+  name                 = var.repo_name
+  description          = var.repo_description
+  visibility           = var.repo_visibility
+  auto_init            = true
+  vulnerability_alerts = true
 }
 
 #resource "github_repository_file" "readme" {

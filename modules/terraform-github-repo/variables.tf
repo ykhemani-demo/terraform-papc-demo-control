@@ -1,6 +1,11 @@
-variable "vcs_repo_name" {
+variable "repo_name" {
   type        = string
   description = "The name of the repository."
+}
+
+variable "repo_description" {
+  type        = string
+  description = "A description of the repository."
 }
 
 variable "repo_visibility" {
