@@ -23,9 +23,20 @@ variable "vcs_owner" {
   description = "Name of VCS owner/organization."
 }
 
-variable "vcs_repo_name" {
+variable "repo_name" {
   type        = string
   description = "Name of VCS repo."
+}
+
+variable "repo_description" {
+  type        = string
+  description = "A description of the repository."
+}
+
+variable "repo_visibility" {
+  type        = string
+  description = "Can be public or private. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, visibility can also be internal. The visibility parameter overrides the private parameter."
+  default     = "private"
 }
 
 variable "github_personal_access_token" {
@@ -69,4 +80,27 @@ variable "hcp_packer_image_bucket_name" {
 variable "hcp_packer_image_channel" {
   type        = string
   description = "The channel that points to the version of the image you want."
+}
+
+variable "policy_set_repo_identifier" {
+  type        = string
+  description = "A reference to your VCS repository in the format <vcs organization>/<repository> where <vcs organization> and <repository> refer to the organization and repository in your VCS provider."
+}
+
+variable "policy_set_repo_branch" {
+  type        = string
+  description = "The repository branch that Terraform will execute from."
+  default     = "main"
+}
+
+variable "tfe_agent_pool_name" {
+  type        = string
+  description = "Name of the agent pool to create."
+  default     = ""
+}
+
+variable "tfe_agent_organization_scoped" {
+  type        = bool
+  description = "Whether or not the agent pool is scoped to all workspaces in the organization."
+  default     = true
 }
