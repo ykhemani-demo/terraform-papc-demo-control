@@ -60,22 +60,28 @@ variable "oauth_token_id" {
 }
 
 variable "hcp_run_task_id" {
-  type = string
+  type        = string
   description = "HCP Run Task ID."
 }
 
 variable "tfe_team_id" {
-  type = string
+  type        = string
   description = "ID of team to be given access to this workspace."
 }
 
 variable "tfe_team_access" {
-  type = string
+  type        = string
   description = "Access to be granted to TFE Team identified by var.tfe_team_id."
-  default = "admin"
+  default     = "admin"
 }
 
 variable "slack_webhook_url" {
-  type = string
+  type        = string
   description = "Slack notification URL."
+}
+
+variable "global_remote_state" {
+  type        = bool
+  description = "Whether the workspace allows all workspaces in the organization to access its state data during runs."
+  default     = true
 }

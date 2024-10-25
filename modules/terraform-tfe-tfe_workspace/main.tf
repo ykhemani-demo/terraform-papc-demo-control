@@ -18,6 +18,7 @@ resource "tfe_workspace" "workspace" {
   auto_destroy_activity_duration = var.auto_destroy_activity_duration
   description                    = var.description
   project_id                     = var.project_id
+  global_remote_state            = var.global_remote_state
   vcs_repo {
     identifier     = var.vcs_repo_identifier
     branch         = var.vcs_repo_branch
@@ -26,10 +27,10 @@ resource "tfe_workspace" "workspace" {
 }
 
 resource "tfe_workspace_run_task" "hcp-run-task" {
-  workspace_id = tfe_workspace.workspace.id
-  task_id = var.hcp_run_task_id
+  workspace_id      = tfe_workspace.workspace.id
+  task_id           = var.hcp_run_task_id
   enforcement_level = "mandatory"
-  stages = ["post_plan"]
+  stages            = ["post_plan"]
 }
 
 resource "tfe_team_access" "team_access" {
@@ -44,4 +45,17 @@ resource "tfe_notification_configuration" "slack" {
   destination_type = "slack"
   url              = var.slack_webhook_url
   workspace_id     = tfe_workspace.workspace.id
+  triggers = [
+    "run:created",
+    "run:planning",
+    "run:needs_attention",
+    "run:applying",
+    "run:completed",
+    "run:errored",
+    "assessment:check_failure",
+    "assessment:drifted",
+    "assessment:failed",
+    "workspace:auto_destroy_reminder",
+    "workspace:auto_destroy_run_results"
+  ]
 }
