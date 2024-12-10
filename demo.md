@@ -8,7 +8,9 @@ I have this come to a separate Slack workspace.
 
 ## Prepare machine images using Packer and register them in HCP Packer
 
-Please see [https://github.com/ykhemani-demo/packer-ubuntu-jammy](https://github.com/ykhemani-demo/packer-ubuntu-jammy) and [https://github.com/ykhemani-demo/packer-ubuntu-jammy-java](https://github.com/ykhemani-demo/packer-ubuntu-jammy-java).
+Use an existing image you've registered in HCP Packer, or see [https://github.com/ykhemani-demo/packer-ubuntu-jammy](https://github.com/ykhemani-demo/packer-ubuntu-jammy) and [https://github.com/ykhemani-demo/packer-ubuntu-jammy-java](https://github.com/ykhemani-demo/packer-ubuntu-jammy-java).
+
+You'll want to revoke an image that you will attempt to use in the course of this demo.
 
 ## Configure variables.
 
@@ -59,8 +61,8 @@ terraform output tfe_team_token
 Clone the app repo that was provisioned above. We will work in a new branch called `demo-step-1`. Do this in another Terminal. 
 
 ```
-git clone git@github.com:ykhemani-demo/terraform-demo.git terraform-demo-dev-branch
-cd terraform-demo-dev-branch
+git clone git@github.com:ykhemani-demo/hcp-terraform-demo.git hcp-terraform-demo-dev-branch
+cd hcp-terraform-demo-dev-branch
 git checkout dev
 git checkout -b demo-step-1
 ```
@@ -68,8 +70,8 @@ git checkout -b demo-step-1
 ## Copy the sample Terraform config from the control repo.
 
 ```
-cp ../terraform-papc-demo-control/demo-repo/instance/*tf .
-cp ../terraform-papc-demo-control/demo-repo/instance/remote.tf.example ./remote.tf
+cp ../hcp-terraform-demo-control/demo-repo/instance/*tf .
+cp ../hcp-terraform-demo-control/demo-repo/instance/remote.tf.example ./remote.tf
 ```
 
 ## Open code in VS Code
@@ -158,6 +160,3 @@ Show the workspace Overview, the VCS connection, outputs, state file, run histor
 Go to the AWS Console and delete or modify a tag for the AWS instance. Make sure you're in the correct AWS region if you don't see the resources.
 
 Kick off a drift detection.
-
-
-
